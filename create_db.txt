@@ -1,0 +1,70 @@
+CREATE TABLE `target_urls` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`property_url` VARCHAR(500) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`area` VARCHAR(100) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`source_page` VARCHAR(500) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`status` ENUM('pending','processing','completed','failed') NULL DEFAULT 'pending' COLLATE 'utf8mb4_unicode_ci',
+	`created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
+	PRIMARY KEY (`id`) USING BTREE,
+	UNIQUE INDEX `property_url` (`property_url`) USING BTREE
+)
+COLLATE='utf8mb4_unicode_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=601
+;
+
+
+
+CREATE TABLE `room` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`property_url` VARCHAR(255) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`transaction_type` VARCHAR(10) NULL DEFAULT NULL COMMENT '거래방식' COLLATE 'utf8mb4_unicode_ci',
+	`deposit` INT(11) NULL DEFAULT NULL,
+	`rent` INT(11) NULL DEFAULT NULL,
+	`management_fee` INT(11) NULL DEFAULT NULL COMMENT '관리비',
+	`loan_amount` VARCHAR(100) NULL DEFAULT NULL COMMENT '융자금' COLLATE 'utf8mb4_unicode_ci',
+	`move_in_date` VARCHAR(50) NULL DEFAULT NULL COMMENT '입주가능일' COLLATE 'utf8mb4_unicode_ci',
+	`residence_report` VARCHAR(20) NULL DEFAULT NULL COMMENT '전입신고 여부' COLLATE 'utf8mb4_unicode_ci',
+	`building_usage` VARCHAR(50) NULL DEFAULT NULL COMMENT '건축물용도' COLLATE 'utf8mb4_unicode_ci',
+	`building_type` VARCHAR(50) NULL DEFAULT NULL COMMENT '건물형태' COLLATE 'utf8mb4_unicode_ci',
+	`exclusive_area` FLOAT NULL DEFAULT NULL COMMENT '전용면적',
+	`floor_info` VARCHAR(50) NULL DEFAULT NULL COMMENT '해당층/전체층' COLLATE 'utf8mb4_unicode_ci',
+	`room_bathroom_count` VARCHAR(50) NULL DEFAULT NULL COMMENT '방/욕실개수' COLLATE 'utf8mb4_unicode_ci',
+	`room_living_type` VARCHAR(50) NULL DEFAULT NULL COMMENT '방거실형태' COLLATE 'utf8mb4_unicode_ci',
+	`main_room_direction` VARCHAR(50) NULL DEFAULT NULL COMMENT '주실기준/방향' COLLATE 'utf8mb4_unicode_ci',
+	`parking_info` VARCHAR(100) NULL DEFAULT NULL COMMENT '주차' COLLATE 'utf8mb4_unicode_ci',
+	`illegal_building` VARCHAR(20) NULL DEFAULT NULL COMMENT '위반건축물 여부' COLLATE 'utf8mb4_unicode_ci',
+	`completion_date` VARCHAR(50) NULL DEFAULT NULL COMMENT '준공인가일' COLLATE 'utf8mb4_unicode_ci',
+	`cooling_system` VARCHAR(100) NULL DEFAULT NULL COMMENT '냉방시설' COLLATE 'utf8mb4_unicode_ci',
+	`living_facilities` TEXT NULL DEFAULT NULL COMMENT '생활시설' COLLATE 'utf8mb4_unicode_ci',
+	`security_facilities` TEXT NULL DEFAULT NULL COMMENT '보안시설' COLLATE 'utf8mb4_unicode_ci',
+	`additional_options` TEXT NULL DEFAULT NULL COMMENT '추가옵션' COLLATE 'utf8mb4_unicode_ci',
+	`property_address` VARCHAR(255) NULL DEFAULT NULL COMMENT '매물주소' COLLATE 'utf8mb4_unicode_ci',
+	`latitude` FLOAT NULL DEFAULT NULL,
+	`longitude` FLOAT NULL DEFAULT NULL,
+	`created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
+	PRIMARY KEY (`id`) USING BTREE,
+	UNIQUE INDEX `property_url` (`property_url`) USING BTREE
+)
+COLLATE='utf8mb4_unicode_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=53
+;
+
+
+
+CREATE TABLE `images` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`property_id` INT(11) NULL DEFAULT NULL,
+	`image_path` VARCHAR(255) NULL DEFAULT NULL COLLATE 'utf8mb4_unicode_ci',
+	`image_order` INT(11) NULL DEFAULT NULL,
+	`is_thumbnail` TINYINT(1) NULL DEFAULT '0',
+	`created_at` TIMESTAMP NULL DEFAULT current_timestamp(),
+	PRIMARY KEY (`id`) USING BTREE,
+	INDEX `idx_property_id` (`property_id`) USING BTREE,
+	CONSTRAINT `FK_images_room` FOREIGN KEY (`property_id`) REFERENCES `room` (`id`) ON UPDATE RESTRICT ON DELETE RESTRICT
+)
+COLLATE='utf8mb4_unicode_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=479
+;
