@@ -1,0 +1,53 @@
+<!-- templates/items.html -->
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>아이템 목록</title>
+</head>
+<body>
+    <h1>아이템 목록</h1>
+    <ul>
+        {% for item in items %}
+            <li>
+                {{ item.id }}
+                {{ item.property_url }}
+                {{ item.transaction_type }}
+                {{ item.deposit }}
+                {{ item.rent }}
+                {{ item.management_fee }}
+                {{ item.contract_period }}
+                {{ item.loan_amount }}
+                {{ item.move_in_date }}
+                {{ item.residence_report }}
+                {{ item.building_usage }}
+                {{ item.building_type }}
+                {{ item.exclusive_area }}
+                {{ item.floor_info }}
+                {{ item.room_bathroom_count }}
+                {{ item.room_living_type }}
+                {{ item.main_room_direction }}
+                {{ item.entrance_type }}
+                {{ item.total_parking_spaces }}
+                {{ item.parking_info }}
+                {{ item.illegal_building }}
+                {{ item.completion_date }}
+                {{ item.heating_system }}
+                {{ item.living_facilities }}
+                {{ item.security_facilities }}
+                {{ item.other_facilities }}
+                {{ item.additional_options }}
+                {{ item.property_address }}
+                {{ item.latitude }}
+                {{ item.longitude }}
+                {{ item.created_at }}
+            
+            </li>
+        {% else %}
+            <li>데이터가 없습니다.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
+
