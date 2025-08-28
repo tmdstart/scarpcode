@@ -48,8 +48,9 @@ CREATE TABLE `room` (
 )
 COLLATE='utf8mb4_unicode_ci'
 ENGINE=InnoDB
-AUTO_INCREMENT=53
+AUTO_INCREMENT=304
 ;
+
 
 
 
@@ -68,3 +69,4 @@ COLLATE='utf8mb4_unicode_ci'
 ENGINE=InnoDB
 AUTO_INCREMENT=479
 ;
+
